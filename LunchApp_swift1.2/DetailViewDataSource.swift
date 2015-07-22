@@ -50,22 +50,21 @@ class DetailViewDataSource:NSObject,UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch(indexPath.row){
         case 0:
-            println("\(tapListCellIndex?.section)がタップされました")
             let cell = tableView.dequeueReusableCellWithIdentifier("menuImageCell", forIndexPath: indexPath) as! MenuImageViewCell
             if tapListCellIndex != nil{
                 var urlStr = shopDataArray[tapListCellIndex!.section]["shopInfo"][tapListCellIndex!.row]["imgURL"].string
                 let url = NSURL(string: urlStr!)
                 cell.menuImageView.sd_setImageWithURL(url, placeholderImage: nil, options: .CacheMemoryOnly)
             }
-//            let url = NSURL(string: "http://tabelog.com/imgview/original?id=r5425938610612")
-//            cell.menuImageView.sd_setImageWithURL(url, placeholderImage: nil, options: .CacheMemoryOnly)
             return cell
         case 1:
             let cell = tableView.dequeueReusableCellWithIdentifier("shopNameCell", forIndexPath: indexPath) as! ShopNameViewCell
             
             if tapListCellIndex != nil{
-                var shopName = shopDataArray[tapListCellIndex!.section]["shopInfo"][tapListCellIndex!.row]["shopName"].string!
+                let shopName = shopDataArray[tapListCellIndex!.section]["shopInfo"][tapListCellIndex!.row]["shopName"].string!
+                let shopURL = shopDataArray[tapListCellIndex!.section]["shopInfo"][tapListCellIndex!.row]["shopURL"].string!
                 cell.shopNameLabel.text = shopName
+                cell.urlLabel.text = shopURL
             }
             cell.shopTextField.text = "口コミデータから抽出した情報を表示する。"
             return cell

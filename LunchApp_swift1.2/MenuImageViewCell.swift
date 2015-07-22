@@ -9,6 +9,7 @@
 // 詳細tableviewの０行目に設定するメニュー画像用cell
 //　セルのメタ設定のみ行い、表示する内容についてはdatasourceが担当
 // 人気メニュー３品程度の画像を自動スライドショー形式で表示させる
+//細かい表示が多くコードでは煩雑なため、xibファイル等でデザインは作る
 
 import Foundation
 import UIKit
@@ -18,7 +19,7 @@ class MenuImageViewCell:UITableViewCell {
     let menuImageView = UIImageView(frame: CGRectZero)
     let gradientView  = UIView(frame: CGRectZero)
     let gradientLayer = CAGradientLayer()
-    var menuText = CATextLayer()
+    var menuLabel = UILabel()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -28,15 +29,16 @@ class MenuImageViewCell:UITableViewCell {
         menuImageView.contentMode     = UIViewContentMode.ScaleAspectFill
         menuImageView.clipsToBounds   = true
         //menuimageにグラデーションviewを追加する
-        let startColor  = UIColor(white: 1.0, alpha: 0.2).CGColor
-        let centerColor = UIColor(white: 0.0, alpha: 0.15).CGColor
-        let endColor    = UIColor(white: 0.0, alpha: 0.6).CGColor
+        let startColor  = UIColor(white: 1.0, alpha: 0.1).CGColor
+        let centerColor = UIColor(white: 0.0, alpha: 0.1).CGColor
+        let endColor    = UIColor(white: 0.0, alpha: 0.5).CGColor
         gradientLayer.colors = [startColor,centerColor,endColor]
         menuImageView.layer.addSublayer(gradientLayer)
-        //textLayer
-        menuText.string = "test"
-        menuText.font   = SettingConfig.menuNameFont
-        menuText.foregroundColor = UIColor.whiteColor().CGColor
+        //textLabel
+        menuLabel.text = "testMenu ¥xxx"
+        menuLabel.font = SettingConfig.menuNameFont
+        menuLabel.textColor = UIColor.whiteColor()
+        menuImageView.addSubview(menuLabel)
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -47,7 +49,7 @@ class MenuImageViewCell:UITableViewCell {
         menuImageView.frame = CGRect(x: 0, y: 0, width: SettingConfig.screenWidth, height: SettingConfig.screenHeight/3)
         gradientView.frame  = menuImageView.frame
         gradientLayer.frame = menuImageView.frame
-        
+        menuLabel.frame = CGRect(x: 5, y: menuImageView.frame.height-25, width: SettingConfig.screenWidth, height: 20)
     }
     
 }

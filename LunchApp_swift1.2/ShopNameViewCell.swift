@@ -17,6 +17,9 @@ class ShopNameViewCell:UITableViewCell {
     
     var shopNameLabel = UILabel(frame: CGRectZero)
     var shopTextField = UITextView(frame: CGRectZero)
+    let iconView1 = UIImageView()
+    let iconView2 = UIImageView()
+    var urlLabel = UILabel(frame: CGRectZero)
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -32,7 +35,15 @@ class ShopNameViewCell:UITableViewCell {
         shopTextField.font      = SettingConfig.generalFont
         shopTextField.textColor = UIColor.blackColor()
         shopTextField.textAlignment = NSTextAlignment.Left
-        //shopTextField.backgroundColor = UIColor.grayColor()
+        //icon
+        
+        iconView1.image = UIImage(named: "timeIcon")
+        self.contentView.addSubview(iconView1)
+        iconView2.image = UIImage(named: "chatIcon")
+        self.contentView.addSubview(iconView2)
+        urlLabel.sizeToFit()
+        urlLabel.font = SettingConfig.generalFont
+        self.contentView.addSubview(urlLabel)
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -42,6 +53,9 @@ class ShopNameViewCell:UITableViewCell {
     override func layoutSubviews() {
         shopNameLabel.frame = CGRect(x: 5, y: 5, width: SettingConfig.screenWidth-5, height: 50)
         shopTextField.frame = CGRect(x: 5, y: shopNameLabel.frame.origin.y+shopNameLabel.frame.height+5, width: SettingConfig.screenWidth/2-10, height: self.frame.height/3*2-5)
+        iconView1.frame = CGRect(x: SettingConfig.screenWidth/2+5, y: shopTextField.frame.origin.y, width: 16, height: 16)
+        iconView2.frame = CGRect(x: iconView1.frame.origin.x,y: iconView1.frame.origin.y+iconView1.frame.height+30,width:16,height:16)
+        urlLabel.frame = CGRect(x: iconView1.center.x+20, y: shopTextField.frame.origin.y, width: 100, height: 20)
     }
     
 }
