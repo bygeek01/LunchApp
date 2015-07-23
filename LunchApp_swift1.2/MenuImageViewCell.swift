@@ -31,7 +31,7 @@ class MenuImageViewCell:UITableViewCell {
         //menuimageにグラデーションviewを追加する
         let startColor  = UIColor(white: 1.0, alpha: 0.1).CGColor
         let centerColor = UIColor(white: 0.0, alpha: 0.1).CGColor
-        let endColor    = UIColor(white: 0.0, alpha: 0.5).CGColor
+        let endColor    = UIColor(white: 0.0, alpha: 0.3).CGColor
         gradientLayer.colors = [startColor,centerColor,endColor]
         menuImageView.layer.addSublayer(gradientLayer)
         //textLabel
